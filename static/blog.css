@@ -1,0 +1,26 @@
+/*li {*/
+    /*list-style-type: none;*/
+/*}*/
+div.blog {
+    border-bottom: solid 1px #cccccc;
+}
+div.blog:last-child {
+    border-bottom: none;
+}
+.content_info {
+    list-style-type: none;
+    padding-left: 0px;
+}
+.content_info li {
+    display: inline-block;
+}
+.blog_content {
+    text-indent: 2em;
+}
+.type-content {
+    border-bottom: solid 1px #cccccc;
+    padding-bottom: 10px;
+}
+div.type-content:last-child {
+    border-bottom: none;
+}

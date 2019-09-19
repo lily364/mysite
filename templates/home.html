@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    home
+{% endblock %}
+
+{% block header_extends %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="content">欢迎来到我的博客</div>
+
+{% endblock %}

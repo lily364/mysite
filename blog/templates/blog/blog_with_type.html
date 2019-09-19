@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block header_extends %}
+    <link rel="stylesheet" href="/static/blog.css">
+{% endblock %}
+{% block title %}
+    blog type
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8 col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                          博客列表（一共有{{ blog_types|length }}条博客）
+                        <a href="{% url 'blogs' %}">查看全部博客列表</a>
+                    </div>
+                    <div class="panel-body">
+                        {% for type in blog_types %}
+                            <div class="type-content">
+                                <div>
+                                    <h3>
+                                        <a href="{% url 'blog' type.pk %}">
+                                            {{ type.title }}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <span class="glyphicon glyphicon-star" aria-hidden="true">
+                                    <a href="{% url 'blog_type' type.blog_type.pk %}">
+                                        {{ type.blog_type }}
+                                    </a>
+                                </span>
+                                <span class="glyphicon glyphicon-time" aria-hidden="true">
+                                    {{ type.created_time|date:"Y-m-d" }}
+                                </span>
+                                <div>{{ type.content }}</div>
+                            </div>
+                        {% empty %}
+                            <p>
+                                暂未此分类博客
+                            </p>
+                        {%endfor%}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">博客分类</div>
+                    <div class="panel-body">
+                        <ul>
+                            {% for blog_type in all_types %}
+                                <li>
+                                    <a href="{% url 'blog_type' blog_type.pk %}">
+                                        {{ blog_type.type_name }}
+                                    </a>
+                                </li>
+                                {% empty %}
+                                    <li>-- 暂无博客类型 --</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

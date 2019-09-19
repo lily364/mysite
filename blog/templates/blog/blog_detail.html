@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block header_extends %}
+    <link rel="stylesheet" href="/static/blog.css">
+{% endblock %}
+{% block title %}
+    blog detail
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <h3>{{ blog_detail.title }}</h3>
+                <ul class="content_info">
+                    <li>作者：{{ blog_detail.author }}</li>
+                    <li>分类：{{ blog_detail.blog_type }}</li>
+                    <li>创建时间：{{ blog_detail.created_time|date:"Y-m-d" }}</li>
+                </ul>
+                <div class="blog_content">{{ blog_detail.content}}</div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
