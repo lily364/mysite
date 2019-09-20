@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from .models import Blog, BlogType
 from django.core.paginator import Paginator
+from django.conf import settings
 # Create your views here.
 
 
@@ -8,13 +9,31 @@ def blog_list(request):
     context = {}
     # 查询全部
     blogs = Blog.objects.all()
-    paginator = Paginator(blogs, 4)
+    paginator = Paginator(blogs, settings.EACH_PAGE_BLOGS_NUM)
     # 获取传入的页面参数
     page_num = request.GET.get('page')
+    if page_num is None:
+        page_num = 1
+    # 获取当前页面
     blogs_of_page = paginator.get_page(page_num)
     blog_types = BlogType.objects.all()
     # 过滤,保留blog_type=2的博客（2为博客类型的id）
     # blogs = Blog.objects.filter(blog_type=2)
+    # 显示当前页的前两页和后两页
+    page_range = list(range(max(1, int(page_num) - 2), int(page_num))) + \
+                list(range(int(page_num), min(int(page_num) + 2, paginator.num_pages) + 1))
+    # 加上省略号
+    if page_range[0] - 1 >= 2:
+        page_range.insert(0, '...')
+    if paginator.num_pages - page_range[-1] >= 2:
+        page_range.append('...')
+    # 加上首页和尾页
+    if 1 not in page_range:
+        page_range.insert(0, 1)
+    if paginator.num_pages not in page_range:
+        page_range.append(paginator.num_pages)
+    context['page_range'] = page_range
+    print(page_range)
     context['blogs'] = blogs_of_page
     context['blog_types'] = blog_types
     return render_to_response('blog/blog_list.html', context)

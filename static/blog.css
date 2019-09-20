@@ -24,3 +24,6 @@ div.blog:last-child {
 div.type-content:last-child {
     border-bottom: none;
 }
+.page-index {
+    text-align: center;
+}
