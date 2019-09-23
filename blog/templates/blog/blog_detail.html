@@ -16,7 +16,22 @@
                     <li>分类：{{ blog_detail.blog_type }}</li>
                     <li>创建时间：{{ blog_detail.created_time|date:"Y-m-d" }}</li>
                 </ul>
-                <div class="blog_content">{{ blog_detail.content}}</div>
+                <div class="blog-content">{{ blog_detail.content}}</div>
+                <p class="blog-index">
+                    {% if last_blog %}
+                        <a href="{% url 'blog' last_blog.pk%}">上一篇：{{last_blog.title}}</a>
+                    {% else %}
+                        上一篇：没有了
+                    {% endif %}
+                </p>
+                <p class="blog-index">
+                    {% if next_blog %}
+                        <a href="{% url 'blog' next_blog.pk%}">下一篇：{{next_blog.title}}</a>
+                    {% else %}
+                        下一篇：没有了
+                    {% endif %}
+                </p>
+
             </div>
         </div>
     </div>

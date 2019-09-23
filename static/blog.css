@@ -14,7 +14,7 @@ div.blog:last-child {
 .content_info li {
     display: inline-block;
 }
-.blog_content {
+.blog-content {
     text-indent: 2em;
 }
 .type-content {
@@ -26,4 +26,8 @@ div.type-content:last-child {
 }
 .page-index {
     text-align: center;
+}
+
+.blog-index {
+    padding-top: 10px;
 }
