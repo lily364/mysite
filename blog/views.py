@@ -38,8 +38,10 @@ def blog_list(request):
     # 查询全部
     blogs = Blog.objects.all()
     blog_types = BlogType.objects.all()
+    blog_dates = Blog.objects.dates('created_time', 'month', order='DESC')
     context = page_of_common(request, blogs)
     context['blog_types'] = blog_types
+    context['blog_dates'] = blog_dates
     return render_to_response('blog/blog_list.html', context)
 
 
@@ -60,6 +62,19 @@ def blog_with_type(request, blog_type):
     all_types = BlogType.objects.all()
     context['all_types'] = all_types
     return render_to_response('blog/blog_with_type.html', context)
+
+
+def blog_with_date(request, year, month):
+    blogs = Blog.objects.filter(created_time__year=year, created_time__month=month)
+    blog_types = BlogType.objects.all()
+    blog_dates = Blog.objects.dates('created_time', 'month', order='DESC')
+    context = page_of_common(request, blogs)
+    context['year'] = year
+    context['month'] = month
+    context['blog_types'] = blog_types
+    context['blog_dates'] = blog_dates
+    return render_to_response('blog/blog_with_date.html', context)
+
 
 
 

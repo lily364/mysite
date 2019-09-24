@@ -12,7 +12,8 @@
             <div class="col-sm-8 col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        博客列表
+                        日期归档：{{ year }}年{{ month }}月
+                        <a href="{% url 'blogs' %}">查看所有博客</a>
                     </div>
                     <div class="panel-body">
                         {% for blog in blogs.object_list %}
